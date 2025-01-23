@@ -1,31 +1,16 @@
-'use client';
+'use client';  // Mark as client-side component to use hooks like useKindeAuth
 
-import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs';  // Import Kinde Auth hook
+import { useRouter } from 'next/navigation';  // For redirecting user
 
 const Profile = () => {
-  const { isAuthenticated, isLoading, getUser } = useKindeAuth();
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const { isAuthenticated } = useKindeAuth();  // Check if the user is authenticated
+  const router = useRouter();  // Use router for redirection
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (isLoading) return;  // Wait for loading to finish
-
-      const user = await getUser();  // Get user data after loading
-      if (!isAuthenticated || !user) {
-        router.push('/api/auth/login');  // Redirect to login if not authenticated
-      } else {
-        setLoading(false);  // Set loading to false if user is authenticated
-      }
-    };
-
-    checkAuth();
-  }, [isAuthenticated, isLoading, router, getUser]);
-
-  if (loading || isLoading) {
-    return <div>Loading...</div>;
+  // If the user is not authenticated, redirect to the login page
+  if (!isAuthenticated) {
+    router.push('/api/auth/login');
+    return <div>Redirecting...</div>;  // Optionally, show loading state
   }
 
   return (

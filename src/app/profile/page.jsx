@@ -1,16 +1,16 @@
-'use client';  // Mark as client-side component to use hooks like useKindeAuth
+'use client'; 
 
-import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs';  // Import Kinde Auth hook
-import { useRouter } from 'next/navigation';  // For redirecting user
+import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs';  
+import { useRouter } from 'next/navigation'; 
 
 const Profile = () => {
-  const { isAuthenticated } = useKindeAuth();  // Check if the user is authenticated
-  const router = useRouter();  // Use router for redirection
+  const { isAuthenticated } = useKindeAuth();  
+  const router = useRouter();  
 
-  // If the user is not authenticated, redirect to the login page
+  
   if (!isAuthenticated) {
     router.push('/api/auth/login');
-    return <div>Redirecting...</div>;  // Optionally, show loading state
+    return <div>Redirecting...</div>;  
   }
 
   return (

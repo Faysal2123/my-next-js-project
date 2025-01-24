@@ -18,6 +18,7 @@ export const Navbar = async () => {
               alt="logo Image"
               width={40}
               height={40}
+              layout="intrinsic"
             />
        
         </div>

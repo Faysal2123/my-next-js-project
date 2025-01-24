@@ -3,7 +3,7 @@ import {redirect} from "next/navigation";
 
 export default async function Protected() {
   const {isAuthenticated} = getKindeServerSession();
-
+console.log(isAuthenticated)
   if (!(await isAuthenticated())) {
     redirect("/api/auth/login");
   }
